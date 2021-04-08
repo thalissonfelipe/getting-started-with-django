@@ -9,8 +9,16 @@ from django.views.generic import (
     TemplateView
 )
 
-from .forms import LeadModelForm
+from .forms import LeadModelForm, CustomUserCreationForm
 from .models import Lead
+
+
+class SignupView(CreateView):
+    template_name = 'registration/signup.html'
+    form_class = CustomUserCreationForm
+
+    def get_success_url(self):
+        return reverse('login')
 
 
 class LandingPageView(TemplateView):
