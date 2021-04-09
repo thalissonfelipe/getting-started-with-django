@@ -1,0 +1,10 @@
+from django.shortcuts import redirect
+from django.contrib.auth.mixins import AccessMixin
+
+
+class OrganizorAndLoginRequiredMixin(AccessMixin):
+    """Verify that the current user is authenticated and is a organizor."""
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated or not request.user.is_organizor:
+            return redirect('leads:lead-list')
+        return super().dispatch(request, *args, **kwargs)

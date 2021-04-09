@@ -12,6 +12,7 @@ from django.views.generic import (
 
 from .forms import LeadModelForm, CustomUserCreationForm
 from .models import Lead
+from agents.mixins import OrganizorAndLoginRequiredMixin
 
 
 class SignupView(CreateView):
@@ -38,7 +39,7 @@ class LeadDetailView(LoginRequiredMixin, DetailView):
     context_object_name = 'lead'
 
 
-class LeadCreateView(LoginRequiredMixin, CreateView):
+class LeadCreateView(OrganizorAndLoginRequiredMixin, CreateView):
     template_name = 'leads/lead_create.html'
     form_class = LeadModelForm
 
@@ -55,7 +56,7 @@ class LeadCreateView(LoginRequiredMixin, CreateView):
         )
         return super(LeadCreateView, self).form_valid(form)
 
-class LeadUpdateView(LoginRequiredMixin, UpdateView):
+class LeadUpdateView(OrganizorAndLoginRequiredMixin, UpdateView):
     template_name = 'leads/lead_update.html'
     queryset = Lead.objects.all()
     form_class = LeadModelForm
@@ -64,7 +65,7 @@ class LeadUpdateView(LoginRequiredMixin, UpdateView):
         return reverse('leads:lead-list')
 
 
-class LeadDeleteView(LoginRequiredMixin, DeleteView):
+class LeadDeleteView(OrganizorAndLoginRequiredMixin, DeleteView):
     template_name = 'leads/lead_delete.html'
     queryset = Lead.objects.all()
 
