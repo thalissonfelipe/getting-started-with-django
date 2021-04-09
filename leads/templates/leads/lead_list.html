@@ -7,12 +7,15 @@
         <div class="w-full flex justify-between items-center py-6 mb-6 border-b border-gray-200">
             <div>
                 <h1 class="text-4xl text-gray-800">Leads</h1>
+                <a class="text-gray-500 hover:text-blue-500" href="{% url 'leads:category-list' %}">
+                    View categories
+                </a>
             </div>
-            <div>
-                {% if request.user.is_organizor %}
+            {% if request.user.is_organizor %}
+                <div>
                     <a class="text-gray-500 hover:text-blue-500" href="{% url 'leads:lead-create' %}">Create a new lead</a>
-                {% endif %}
-            </div>
+                </div>
+            {% endif %}
         </div>
         <div class="flex flex-wrap -m-4">
             {% for lead in leads %}
