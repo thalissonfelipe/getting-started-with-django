@@ -11,5 +11,6 @@ crispy-tailwind==0.4.0
 django-crispy-forms==1.11.2
 django-environ==0.4.5
 django==3.1.4
+psycopg2-binary==2.8.6
 pytz==2021.1
 sqlparse==0.4.1; python_version >= '3.5'
